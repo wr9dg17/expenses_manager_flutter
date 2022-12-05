@@ -34,62 +34,59 @@ class _AddTransactionState extends State<AddTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Container(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              decoration: const InputDecoration(labelText: 'Title'),
-              controller: _titleController,
-            ),
-            TextField(
-              decoration: const InputDecoration(labelText: 'Amount'),
-              controller: _amountController,
-              keyboardType: TextInputType.number,
-            ),
-            SizedBox(
-              height: 60,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      _selectedDate != null
-                          ? DateFormat.yMMMMd().format(_selectedDate!)
-                          : 'No date choosen',
-                    ),
+    return Container(
+      padding: const EdgeInsets.fromLTRB(15.0, 5, 15.0, 15.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TextField(
+            decoration: const InputDecoration(labelText: 'Title'),
+            controller: _titleController,
+          ),
+          TextField(
+            decoration: const InputDecoration(labelText: 'Amount'),
+            controller: _amountController,
+            keyboardType: TextInputType.number,
+          ),
+          SizedBox(
+            height: 60,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    _selectedDate != null
+                        ? DateFormat.yMMMMd().format(_selectedDate!)
+                        : 'No date choosen',
                   ),
-                  TextButton(
-                    onPressed: () {
-                      _showDatePicker();
-                    },
-                    child: const Text(
-                      'Choose date',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  )
-                ],
-              ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    _showDatePicker();
+                  },
+                  child: const Text(
+                    'Choose date',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                )
+              ],
             ),
-            ElevatedButton(
-              onPressed: () {
-                final enteredTitle = _titleController.text;
-                final enteredAmount = double.parse(_amountController.text);
+          ),
+          ElevatedButton(
+            onPressed: () {
+              final enteredTitle = _titleController.text;
+              final enteredAmount = double.parse(_amountController.text);
 
-                if (enteredTitle.isEmpty || enteredAmount <= 0) {
-                  return;
-                }
+              if (enteredTitle.isEmpty || enteredAmount <= 0) {
+                return;
+              }
 
-                Navigator.pop(context);
-                widget.onAddTransaction(
-                    enteredTitle, enteredAmount, _selectedDate);
-              },
-              child: const Text('Add transaction'),
-            )
-          ],
-        ),
+              Navigator.pop(context);
+              widget.onAddTransaction(
+                  enteredTitle, enteredAmount, _selectedDate);
+            },
+            child: const Text('Add transaction'),
+          )
+        ],
       ),
     );
   }

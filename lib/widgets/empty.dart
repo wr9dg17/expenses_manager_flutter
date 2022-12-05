@@ -10,23 +10,27 @@ class Empty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        children: [
-          Text(
-            title,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 15),
-          SizedBox(
-            height: 150,
-            child: Image.asset(
-              'assets/images/waiting.png',
-              fit: BoxFit.contain,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
-          ),
-        ],
+            const SizedBox(height: 15),
+            SizedBox(
+              height: 150,
+              child: Image.asset(
+                'assets/images/waiting.png',
+                fit: BoxFit.contain,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

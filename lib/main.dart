@@ -71,8 +71,14 @@ class _MyHomePageState extends State<MyHomePage> {
   void _triggerAddTransaction(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (modalContext) {
-        return AddTransaction(onAddTransaction: _addTransaction);
+        return SingleChildScrollView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: AddTransaction(onAddTransaction: _addTransaction),
+        );
       },
     );
   }
@@ -113,9 +119,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             Chart(transactions: _recentTransactions),
-            TransactionsList(
-              transactions: _transactions,
-              onDeleteTransaction: _deleteTransaction,
+            Expanded(
+              child: TransactionsList(
+                transactions: _transactions,
+                onDeleteTransaction: _deleteTransaction,
+              ),
             ),
           ],
         ),
